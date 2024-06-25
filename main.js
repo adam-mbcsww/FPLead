@@ -1,5 +1,5 @@
-import firebase from 'https://cdn.firebase.com/libs/firebasejs/9.6.1/firebase-app.js';
-import 'https://cdn.firebase.com/libs/firebasejs/9.6.1/firebase-firestore.js';
+import firebase from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
 $(() => {
   const firebaseConfig = {
