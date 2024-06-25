@@ -58,7 +58,7 @@ $(() => {
     const usrObj = {
       data: [],
     };
-    usrObj.data = users.slice(0, 50); // limit the array to the first 50 elements
+    usrObj.data = users.slice(0, 200); // limit the array to the first 50 elements
   
     const usrArr = [];
   
