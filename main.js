@@ -20,6 +20,14 @@ $(() => {
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+ 
+  const collectionRef = db.collection('leaderboards');
+  
+  collectionRef.get().then(querySnapshot => {
+    querySnapshot.docs.forEach(doc => {
+      doc.ref.update({ timestamp: firebase.firestore.FieldValue.serverTimestamp() });
+    });
+  });
 
   const getUsers = async (db) => {
     const userCol = collection(db, "leaderboards");
@@ -43,7 +51,7 @@ $(() => {
       const formattedTimestamp = timestamp.toLocaleString(); // or use a library like moment.js for formatting
       usrArr.push([user.name, user.score, user.time, formattedTimestamp]);
     });
-    
+
     new DataTable("#table", {
       data: usrArr,
     });
