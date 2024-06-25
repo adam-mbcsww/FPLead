@@ -75,7 +75,8 @@ $(() => {
           { title: "Time" },
           { title: "Created" }
         ],
-        order: [[1, 'desc']] // sort by score in descending order
+        order: [[1, 'desc']], // sort by score in descending order
+        pageLength: -1 // display all data on a single page
       }); 
     }); 
     
