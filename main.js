@@ -40,11 +40,7 @@ $(() => {
     const startDate = new Date("2024-06-25T00:00:00.000Z"); // DAILY adjust this to the desired date
     const q = query(userCol, where("timestamp", ">=", startDate));
     const userSnapshot = await getDocs(q);
-    const userList = userSnapshot.docs.map((doc) => {
-      const timestamp = doc.data().timestamp;
-      const isoString = convertTimeFormat(timestamp);
-      return { ...doc.data(), timestamp: isoString };
-    });
+    const userList = userSnapshot.docs.map((doc) => doc.data());
     return userList;
   };
 
@@ -63,7 +59,7 @@ $(() => {
     usrObj.data.forEach((user) => {
       const timestamp = user.timestamp;
       const isoString = convertTimeFormat(timestamp);
-      usrArr.push([user.name, user.score, user.time, isoString]);
+      usrArr.push([user.name, user.score, user.time, user.timestamp]);
     });
 
  
