@@ -24,7 +24,7 @@ $(() => {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-const leaderboardRef = collection(db, 'leaderboard');
+const leaderboardRef = collection(db, 'leaderboards');
 
 for (let i = 0; i < 100; i++) {
   const data = {
