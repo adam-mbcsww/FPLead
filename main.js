@@ -32,10 +32,7 @@ $(() => {
     const date = new Date(2024, month, day, hours, minutes, 0, 0); // assuming the year is 2024
     return date.toISOString();
   }
-  
-  const timeString = '24d 9m 6hrs 50mins';
-  const isoString = convertTimeFormat(timeString);  
-
+    
   const getUsers = async (db) => {
     const userCol = collection(db, "leaderboards");
     const startDate = new Date("2024-06-25T00:00:00.000Z"); // DAILY adjust this to the desired date
