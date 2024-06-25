@@ -4,6 +4,7 @@ import {
   addDoc,
   getDocs,
   collection,
+  serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 $(() => {
@@ -37,7 +38,7 @@ $(() => {
     const usrArr = [];
 
     usrObj.data.forEach((user) => {
-      usrArr.push([user.name, user.score, user.time]);
+      usrArr.push([user.name, user.score, user.time, serverTimestamp()]);
     });
     new DataTable("#table", {
       data: usrArr,
