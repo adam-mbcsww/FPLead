@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { getFirestore, addDoc, collection } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBE9tWytUvjpjQ2k0CsUyIhVXC0Vpr4HxI",
@@ -19,9 +19,9 @@ const leaderboardRef = collection(db, 'leaderboard');
 for (let i = 0; i < 100; i++) {
   const data = {
     name: `"${i}"`,
-    score: `"1450"`,
-    time: `"24"`,
-    timedate: serverTimestamp()
+    score: `"1800"`,
+    time: `"27"`,
+    timestamp: `${Math.floor(Math.random() * 30)}d ${Math.floor(Math.random() * 12)}m ${Math.floor(Math.random() * 24)}hrs ${Math.floor(Math.random() * 60)}mins`
   };
   addDoc(leaderboardRef, data);
 }
