@@ -39,7 +39,9 @@ $(() => {
     const usrArr = [];
 
     usrObj.data.forEach((user) => {
-      usrArr.push([user.name, user.score, user.time, user.timestamp]);
+      const timestamp = user.timestamp.toDate();
+      const formattedTimestamp = timestamp.toLocaleString();
+      usrArr.push([user.name, user.score, user.time, formattedTimestamp]);
     });
 
     new DataTable("#table", {
