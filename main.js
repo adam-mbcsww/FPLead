@@ -4,6 +4,8 @@ import {
   addDoc,
   getDocs,
   collection,
+  query,
+  where,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 $(() => {
@@ -33,21 +35,16 @@ $(() => {
 
   const getUsers = async (db) => {
     const userCol = collection(db, "leaderboards");
-    const userSnapshot = await getDocs(userCol);
+    const startDate = new Date("2024-06-25T00:00:00.000Z"); // adjust this date as needed
+    const endDate = new Date("2024-06-26T23:59:59.999Z"); // adjust this date as needed
+    const q = query(userCol, where("timestamp", ">=", startDate), where("timestamp", "<=", endDate));
+    const userSnapshot = await getDocs(q);
     const userList = userSnapshot.docs.map((doc) => {
       const timestamp = doc.data().timestamp;
       const isoString = convertTimeFormat(timestamp);
       return {...doc.data(), timestamp: isoString };
     });
-  
-    // Filter results to show only records from a certain date
-    const cutoffDate = new Date('2024-06-26T00:00:00.000Z'); // adjust this date as needed
-    const filteredList = userList.filter((user) => {
-      const userDate = new Date(user.timestamp);
-      return userDate >= cutoffDate;
-    });
-  
-    return filteredList;
+    return userList;
   };
 
   const users_data = getUsers(db);
