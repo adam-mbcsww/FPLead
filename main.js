@@ -5,6 +5,7 @@ import {
   getDocs,
   collection,
   serverTimestamp,
+  updateDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 $(() => {
@@ -35,15 +36,18 @@ $(() => {
     };
     usrObj.data = users;
 
-
     const usrArr = [];
 
     usrObj.data.forEach((user) => {
-      const timestamp = serverTimestamp().toDate();
-      const formattedTimestamp = timestamp.toLocaleString(); // or use a library like moment.js for formatting
-      usrArr.push([user.name, user.score, user.time, formattedTimestamp]);
+      usrArr.push([user.name, user.score, user.time]);
     });
-    
+
+    // Update each document with the current server timestamp
+    usrObj.data.forEach((user) => {
+      const userRef = collection(db, "leaderboards").doc(user.id);
+      updateDoc(userRef, { timestamp: serverTimestamp() });
+    });
+
     new DataTable("#table", {
       data: usrArr,
     });
