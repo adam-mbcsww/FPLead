@@ -20,10 +20,25 @@ $(() => {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
+  function convertTimeFormat(timeString) {
+    const parts = timeString.split(' ');
+    const day = parseInt(parts[0].replace('d', ''));
+    const month = parseInt(parts[1].replace('m', '')) - 1; // months are 0-based in JS
+    const hours = parseInt(parts[2].replace('hrs', ''));
+    const minutes = parseInt(parts[3].replace('mins', ''));
+  
+    const date = new Date(2024, month, day, hours, minutes, 0, 0); // assuming the year is 2024
+    return date.toISOString();
+  }
+
   const getUsers = async (db) => {
     const userCol = collection(db, "leaderboards");
     const userSnapshot = await getDocs(userCol);
-    const userList = userSnapshot.docs.map((doc) => doc.data());
+    const userList = userSnapshot.docs.map((doc) => {
+      const timestamp = doc.data().timestamp;
+      const isoString = convertTimeFormat(timestamp);
+      return {...doc.data(), timestamp: isoString };
+    });
     return userList;
   };
 
