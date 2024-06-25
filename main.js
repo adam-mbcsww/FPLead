@@ -44,11 +44,13 @@ $(() => {
       const isoString = convertTimeFormat(timestamp);
       return {...doc.data(), timestamp: isoString };
     });
+    console.log("User List:", userList);
     return userList;
   };
 
   const users_data = getUsers(db);
   users_data.then((users) => {
+    console.log("Users Data:", users);
     const usrObj = {
       data: [],
     };
