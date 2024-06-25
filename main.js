@@ -4,8 +4,6 @@ import {
   addDoc,
   getDocs,
   collection,
-  query,
-  where,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 $(() => {
@@ -35,42 +33,37 @@ $(() => {
 
   const getUsers = async (db) => {
     const userCol = collection(db, "leaderboards");
-    const startDate = new Date("2024-06-25T00:00:00.000Z"); // adjust this date as needed
-    const endDate = new Date("2024-06-27T23:59:59.999Z"); // adjust this date as needed
-    const q = query(userCol, where("timestamp", ">=", startDate), where("timestamp", "<=", endDate));
-    const userSnapshot = await getDocs(q);
+    const userSnapshot = await getDocs(userCol);
     const userList = userSnapshot.docs.map((doc) => {
       const timestamp = doc.data().timestamp;
       const isoString = convertTimeFormat(timestamp);
       return {...doc.data(), timestamp: isoString };
     });
-    console.log("User List:", userList);
-    return userList;
+  
+    // Filter results to show only records from a certain date
+    const cutoffDate = new Date('2024-06-26T00:00:00.000Z'); // adjust this date as needed
+    const filteredList = userList.filter((user) => {
+      const userDate = new Date(user.timestamp);
+      return userDate >= cutoffDate;
+    });
+  
+    return filteredList;
   };
 
   const users_data = getUsers(db);
   users_data.then((users) => {
-    console.log("Users Data:", users);
     const usrObj = {
       data: [],
     };
     usrObj.data = users;
 
-    const usrArr = usrObj.data.map((user) => {
-      return [user.name, user.score, user.time, user.timestamp];
-    });
+    const usrArr = [];
 
-    $(document).ready(function() {
-      $('#table').DataTable({
-        data: usrArr,
-        columns: [
-          { title: "Name" },
-          { title: "Score" },
-          { title: "Time" },
-          { title: "Created" }
-        ],
-        order: [[1, 'desc']]
-      });
+    usrObj.data.forEach((user) => {
+      usrArr.push([user.name, user.score, user.time, user.timestamp]);
+    });
+    new DataTable("#table", {
+      data: usrArr,
     });
   });
 });
