@@ -59,9 +59,8 @@ $(() => {
     usrObj.data.forEach((user) => {
       const timestamp = user.timestamp;
       const isoString = convertTimeFormat(timestamp);
-      usrArr.push([user.name, user.score, user.time, user.timestamp]);
+      usrArr.push([user.name, user.score, user.time, isoString]);
     });
-
  
 
     new DataTable("#table", {
