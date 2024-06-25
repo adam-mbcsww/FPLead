@@ -1,4 +1,4 @@
-import { initializeApp } from 'https://cdn.firebase.com/libs/firebasejs/9.6.1/firebase-app.js';
+import { initializeApp } from 'firebase/app';
 import { getFirestore, addDoc, getDocs, collection } from 'firebase/firestore';
 
 // Initialize Firebase
