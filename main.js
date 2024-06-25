@@ -39,7 +39,15 @@ $(() => {
       const isoString = convertTimeFormat(timestamp);
       return {...doc.data(), timestamp: isoString };
     });
-    return userList;
+  
+    // Filter results to show only records from a certain date
+    const cutoffDate = new Date('2024-06-01T00:00:00.000Z'); // adjust this date as needed
+    const filteredList = userList.filter((user) => {
+      const userDate = new Date(user.timestamp);
+      return userDate >= cutoffDate;
+    });
+  
+    return filteredList;
   };
 
   const users_data = getUsers(db);
