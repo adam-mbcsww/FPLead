@@ -54,13 +54,21 @@ $(() => {
     };
     usrObj.data = users;
 
-    const usrArr = [];
-
-    usrObj.data.forEach((user) => {
-      usrArr.push([user.name, user.score, user.time, user.timestamp]);
+    const usrArr = usrObj.data.map((user) => {
+      return [user.name, user.score, user.time, user.timestamp];
     });
-    new DataTable("#table", {
-      data: usrArr,
+
+    $(document).ready(function() {
+      $('#table').DataTable({
+        data: usrArr,
+        columns: [
+          { title: "Name" },
+          { title: "Score" },
+          { title: "Time" },
+          { title: "Created" }
+        ],
+        order: [[1, 'desc']]
+      });
     });
   });
 });
