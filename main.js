@@ -6,6 +6,8 @@ import {
   collection,
   serverTimestamp,
   updateDoc,
+  query,
+  where,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 $(() => {
@@ -24,7 +26,9 @@ $(() => {
 
   const getUsers = async (db) => {
     const userCol = collection(db, "leaderboards");
-    const userSnapshot = await getDocs(userCol);
+    const startDate = new Date("2024-06-25T00:00:00.000Z"); // DAILY adjust this to the desired date
+    const q = query(userCol, where("timestamp", ">=", startDate));
+    const userSnapshot = await getDocs(q);
     const userList = userSnapshot.docs.map((doc) => doc.data());
     return userList;
   };
