@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from './node_modules/firebase/app';
 import { getFirestore, addDoc, getDocs, collection } from 'firebase/firestore';
 
 // Initialize Firebase
