@@ -51,8 +51,17 @@ $(() => {
       usrArr.push([user.name, user.score, user.time, formattedTimestamp]);
     });
 
-    new DataTable("#table", {
-      data: usrArr,
+    $(document).ready(function () {
+      $("#table").DataTable({
+        data: usrArr,
+        columns: [
+          { title: "Name" },
+          { title: "Score" },
+          { title: "Time" },
+          { title: "Created" },
+        ],
+        order: [[1, "desc"]], // sort by score in descending order
+      });
     });
   });
 });
