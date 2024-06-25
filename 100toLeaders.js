@@ -31,7 +31,7 @@ for (let i = 0; i < 100; i++) {
     name: `name${i}`,
     score: `1800`,
     time: `27`,
-    timestamp: `${Math.floor(Math.random() * 30)}d ${Math.floor(Math.random() * 12)}m ${Math.floor(Math.random() * 24)}hrs ${Math.floor(Math.random() * 60)}mins`
+    timestamp: `26d 6m 0hrs 5mins`
   };
   addDoc(leaderboardRef, data);
 }});
