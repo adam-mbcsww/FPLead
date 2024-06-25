@@ -40,31 +40,33 @@ $(() => {
     const startDate = new Date("2024-06-25T00:00:00.000Z"); // DAILY adjust this to the desired date
     const q = query(userCol, where("timestamp", ">=", startDate));
     const userSnapshot = await getDocs(q);
+    console.log("User snapshot:", userSnapshot);
     const userList = userSnapshot.docs.map((doc) => doc.data());
+    console.log("User list:", userList);
     return userList;
   };
-
-
   
   const users_data = getUsers(db);
   users_data.then((users) => {
+    console.log("Users:", users);
     const usrObj = {
       data: [],
     };
     usrObj.data = users;
-
+  
     const usrArr = [];
-
-
+  
     usrObj.data.forEach((user) => {
       const timestamp = user.timestamp;
       const isoString = convertTimeFormat(timestamp);
       usrArr.push([user.name, user.score, user.time, isoString]);
     });
- 
-
+  
+    console.log("usrArr:", usrArr);
+  
     new DataTable("#table", {
       data: usrArr,
     });
+  }).catch((error) => {
+    console.error("Error:", error);
   });
-});
