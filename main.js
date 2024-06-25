@@ -55,17 +55,8 @@ $(() => {
 
     const usrArr = [];
 
-    usrObj.data.forEach((user) => {
-      let formattedTimestamp = "";
-      if (user.timestamp) {
-        const timestamp = user.timestamp.toDate();
-        const day = timestamp.getDate();
-        const month = timestamp.getMonth() + 1;
-        const hours = timestamp.getHours();
-        const minutes = timestamp.getMinutes();
-        formattedTimestamp = `${day}day ${month}month ${hours}hours ${minutes}minutes`;
-      }
-      usrArr.push([user.name, user.score, user.time, formattedTimestamp]);
+    usrObj.data.forEach((user) => { 
+      usrArr.push([user.name, user.score, user.time, user.created]);
     });
 
     $(document).ready(function () {
