@@ -39,13 +39,7 @@ $(() => {
     const usrArr = [];
 
     usrObj.data.forEach((user) => {
-      usrArr.push([user.name, user.score, user.time]);
-    });
-
-    // Update each document with the current server timestamp
-    usrObj.data.forEach((user) => {
-      const userRef = collection(db, "leaderboards").doc(user.id);
-      updateDoc(userRef, { timestamp: serverTimestamp() });
+      usrArr.push([user.name, user.score, user.time, user.timestamp]);
     });
 
     new DataTable("#table", {
