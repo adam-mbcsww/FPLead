@@ -32,7 +32,7 @@ const db = getFirestore(app);
     const usrArr = [];
 
     usrObj.data.forEach((user) => {
-      usrArr.push([user.name, user.score, user.time]);
+      usrArr.push([user.name, user.score, user.time, user.timestamp.toDate().toLocaleString()]);
     });
     new DataTable("#table", {
       data: usrArr,
