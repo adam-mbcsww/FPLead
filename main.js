@@ -9,7 +9,7 @@ import {
   query,
   where,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
+console.log("Script is running...");
 $(() => {
   const firebaseConfig = {
     apiKey: "AIzaSyBE9tWytUvjpjQ2k0CsUyIhVXC0Vpr4HxI",
