@@ -18,7 +18,7 @@ const db = getFirestore(app);
 const getUsers = async (db) => {
   const userCol = collection(db, "leaderboards");
   const userSnapshot = await getDocs(userCol);
-  const userList = userSnapshot.docs.map((doc) => ({...doc.data(), timestamp: doc.data().timestamp? doc.data().timestamp : serverTimestamp() }));
+  const userList = userSnapshot.docs.map((doc) => ({...doc.data(), timestamp: doc.data().timestamp ? doc.data().timestamp : serverTimestamp() }));
   return userList;
 };
 
@@ -34,6 +34,7 @@ users_data.then((users) => {
   usrObj.data.forEach((user) => {
     usrArr.push([user.name, user.score, user.time, user.timestamp.toDate().toLocaleString()]);
   });
+
   new DataTable("#table", {
     data: usrArr,
   });
