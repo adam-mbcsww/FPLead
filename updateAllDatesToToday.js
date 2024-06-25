@@ -19,16 +19,16 @@ $(() => {
     measurementId: "G-0LCDSJMXKE",
   };
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
   const updateTimestamps = async (db) => {
     const userCol = collection(db, "leaderboards");
     const userSnapshot = await getDocs(userCol);
     userSnapshot.docs.forEach((doc) => {
-      updateDoc(doc.ref, { timestamp: serverTimestamp() });
+      const newTimestamp = '26d 6m 0hrs 5mins';
+      const isoString = convertTimeFormat(newTimestamp);
+      updateDoc(doc.ref, { timestamp: isoString });
     });
   };
-
+  
   updateTimestamps(db);
 });
+
