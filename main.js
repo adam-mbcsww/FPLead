@@ -33,22 +33,25 @@ $(() => {
 
   const getUsers = async (db) => {
     const userCol = collection(db, "leaderboards");
-    const userSnapshot = await getDocs(userCol);
+    const userSnapshot = await getDocs(userCol, {
+      orderBy: "score", // order by score in descending order
+      limit: 50 // limit to 50 documents
+    });
     const userList = userSnapshot.docs.map((doc) => {
       const timestamp = doc.data().timestamp;
       const isoString = convertTimeFormat(timestamp);
       return {...doc.data(), timestamp: isoString };
     });
-  
+    
     // Filter results to show only records from a certain date
     const cutoffDate = new Date('2024-06-24T00:00:00.000Z'); // adjust this date as needed
     const filteredList = userList.filter((user) => {
       const userDate = new Date(user.timestamp);
       return userDate >= cutoffDate;
     });
-  
+    
     return filteredList;
-  };
+  }; 
 
   const users_data = getUsers(db);
   users_data.then((users) => {
@@ -62,7 +65,7 @@ $(() => {
     usrObj.data.forEach((user) => {
       usrArr.push([user.name, user.score, user.time, user.timestamp]);
     });
-
+    
     $(document).ready(function() {
       const table = $('#table').DataTable({
         data: usrArr,
@@ -72,8 +75,7 @@ $(() => {
           { title: "Time" },
           { title: "Created" }
         ],
-        order: [[1, 'desc']], // sort by score in descending order
-        pageLength: 100, // limit the data to top 50 highest scores
+        order: [[1, 'desc']] // sort by score in descending order
       }); 
     }); 
     
