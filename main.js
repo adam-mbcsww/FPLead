@@ -35,11 +35,15 @@ $(() => {
     };
     usrObj.data = users;
 
+
     const usrArr = [];
 
     usrObj.data.forEach((user) => {
-      usrArr.push([user.name, user.score, user.time, serverTimestamp()]);
+      const timestamp = serverTimestamp().toDate();
+      const formattedTimestamp = timestamp.toLocaleString(); // or use a library like moment.js for formatting
+      usrArr.push([user.name, user.score, user.time, formattedTimestamp]);
     });
+    
     new DataTable("#table", {
       data: usrArr,
     });
