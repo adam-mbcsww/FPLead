@@ -62,7 +62,7 @@ $(() => {
     usrObj.data.forEach((user) => {
       usrArr.push([user.name, user.score, user.time, user.timestamp]);
     });
-    
+
     $(document).ready(function() {
       const table = $('#table').DataTable({
         data: usrArr,
@@ -72,7 +72,8 @@ $(() => {
           { title: "Time" },
           { title: "Created" }
         ],
-        order: [[1, 'desc']] // sort by score in descending order
+        order: [[1, 'desc']], // sort by score in descending order
+        pageLength: 100, // limit the data to top 50 highest scores
       }); 
     }); 
     
