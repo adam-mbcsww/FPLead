@@ -35,7 +35,7 @@ $(() => {
 
   const getUsers = async (db) => {
     const userCol = collection(db, "leaderboards");
-    const startDate = new Date("2024-06-25T00:00:00.000Z"); // adjust this date as needed
+    const startDate = new Date("2024-06-26T00:00:00.000Z"); // adjust this date as needed
     const endDate = new Date("2024-06-26T23:59:59.999Z"); // adjust this date as needed
     const q = query(userCol, where("timestamp", ">=", startDate), where("timestamp", "<=", endDate));
     const userSnapshot = await getDocs(q);
