@@ -39,8 +39,11 @@ $(() => {
     const usrArr = [];
 
     usrObj.data.forEach((user) => {
-      const timestamp = user.timestamp.toDate();
-      const formattedTimestamp = timestamp.toLocaleString();
+      let formattedTimestamp = "";
+      if (user.timestamp) {
+        const timestamp = user.timestamp.toDate();
+        formattedTimestamp = timestamp.toLocaleString();
+      }
       usrArr.push([user.name, user.score, user.time, formattedTimestamp]);
     });
 
