@@ -5,7 +5,6 @@ import {
   getDocs,
   collection,
   serverTimestamp,
-  updateDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 $(() => {
@@ -22,13 +21,31 @@ $(() => {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  const updateTimestamps = async (db) => {
+  const getUsers = async (db) => {
     const userCol = collection(db, "leaderboards");
     const userSnapshot = await getDocs(userCol);
-    userSnapshot.docs.forEach((doc) => {
-      updateDoc(doc.ref, { timestamp: serverTimestamp() });
-    });
+    const userList = userSnapshot.docs.map((doc) => doc.data());
+    return userList;
   };
 
-  updateTimestamps(db);
+  const users_data = getUsers(db);
+  users_data.then((users) => {
+    const usrObj = {
+      data: [],
+    };
+    usrObj.data = users;
+
+
+    const usrArr = [];
+
+    usrObj.data.forEach((user) => {
+      const timestamp = serverTimestamp().toDate();
+      const formattedTimestamp = timestamp.toLocaleString(); // or use a library like moment.js for formatting
+      usrArr.push([user.name, user.score, user.time, formattedTimestamp]);
+    });
+    
+    new DataTable("#table", {
+      data: usrArr,
+    });
+  });
 });
