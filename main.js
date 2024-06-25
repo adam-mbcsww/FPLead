@@ -1,5 +1,5 @@
-import firebase from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
 
 $(() => {
   const firebaseConfig = {
@@ -13,7 +13,7 @@ $(() => {
   };
 
   const app = firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore(app);
+  const db = firebase.firestore();
 
   const getUsers = async (db) => {
     const userCol = db.collection("leaderboards");
