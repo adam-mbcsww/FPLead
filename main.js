@@ -24,25 +24,27 @@ $(() => {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // const getUsers = async (db) => {
-  //   const userCol = collection(db, "leaderboards");
-  //   const startDate = new Date("2024-06-25T00:00:00.000Z"); // DAILY adjust this to the desired date
-  //   const q = query(userCol, where("timestamp", ">=", startDate));
-  //   const userSnapshot = await getDocs(q);
-  //   const userList = userSnapshot.docs.map((doc) => doc.data());
-  //   return userList;
-  // };
-
+  //// Refresh DAILY ////
   const getUsers = async (db) => {
     const userCol = collection(db, "leaderboards");
-    const startDate = new Date("2024-06-16T00:00:00.000Z"); // get current date
-    startDate.setDate(startDate.getDate() - startDate.getDay()); // set to first day of the week
-    const endDate = new Date(startDate.getTime() + 7 * 24 * 60 * 60 * 1000); // set to last day of the week
-    const q = query(userCol, where("timestamp", ">=", startDate), where("timestamp", "<", endDate));
+    const startDate = new Date("2024-06-25T00:00:00.000Z"); // DAILY adjust this to the desired date
+    const q = query(userCol, where("timestamp", ">=", startDate));
     const userSnapshot = await getDocs(q);
     const userList = userSnapshot.docs.map((doc) => doc.data());
     return userList;
   };
+
+  //// Refresh WEEKLY ////
+  // const getUsers = async (db) => {
+  //   const userCol = collection(db, "leaderboards");
+  //   const startDate = new Date("2024-06-16T00:00:00.000Z"); // get current date
+  //   startDate.setDate(startDate.getDate() - startDate.getDay()); // set to first day of the week
+  //   const endDate = new Date(startDate.getTime() + 7 * 24 * 60 * 60 * 1000); // set to last day of the week
+  //   const q = query(userCol, where("timestamp", ">=", startDate), where("timestamp", "<", endDate));
+  //   const userSnapshot = await getDocs(q);
+  //   const userList = userSnapshot.docs.map((doc) => doc.data());
+  //   return userList;
+  // };
 
   const users_data = getUsers(db);
   users_data.then((users) => {
