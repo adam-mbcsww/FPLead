@@ -58,10 +58,10 @@ $(() => {
     const usrObj = {
       data: [],
     };
-    usrObj.data = users;
-
+    usrObj.data = users.slice(0, 50); // limit the array to the first 50 elements
+  
     const usrArr = [];
-
+  
     usrObj.data.forEach((user) => {
       usrArr.push([user.name, user.score, user.time, user.timestamp]);
     });
@@ -75,10 +75,10 @@ $(() => {
           { title: "Time" },
           { title: "Created" }
         ],
-        order: [[1, 'desc']], // sort by score in descending order
-        pageLength: -1 // display all data on a single page
+        order: [[1, 'desc']] // sort by score in descending order
       }); 
     }); 
     
   });
+    
 });
