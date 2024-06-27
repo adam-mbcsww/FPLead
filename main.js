@@ -31,8 +31,7 @@ $(() => {
     const hours = parseInt(parts[2].replace('hrs', ''));
     const minutes = parseInt(parts[3].replace('mins', ''));
   
-    // Assuming the year is 2024
-    const year = 2024;
+    const year = new Date().getFullYear();
   
     const date = new Date(year, month, day, hours, minutes, 0, 0);
     return date.toISOString();
