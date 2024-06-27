@@ -22,16 +22,20 @@ $(() => {
 
   function convertTimeFormat(timeString) {
     const parts = timeString.split(' ');
-    const year = parseInt(parts[4].replace('yr', '')); // extract the year from the timeString
-    const month = parseInt(parts[1].replace('m', '')) - 1; // months are 0-based in JS
+    if (parts.length < 5) {
+      throw new Error(`Invalid time string format: ${timeString}`);
+    }
+  
     const day = parseInt(parts[0].replace('d', ''));
+    const month = parseInt(parts[1].replace('m', '')) - 1; // months are 0-based in JS
     const hours = parseInt(parts[2].replace('hrs', ''));
     const minutes = parseInt(parts[3].replace('mins', ''));
+    const year = parseInt(parts[4].replace('yr', ''));
   
     const date = new Date(year, month, day, hours, minutes, 0, 0);
     return date.toISOString();
   }
-
+  
   const getUsers = async (db) => {
     const userCol = collection(db, "leaderboards");
     const userSnapshot = await getDocs(userCol, {
