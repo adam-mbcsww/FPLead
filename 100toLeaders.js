@@ -28,10 +28,10 @@ const leaderboardRef = collection(db, 'leaderboards');
 
 for (let i = 0; i < 100; i++) {
   const data = {
-    name: `name${i}`,
-    score: `1800`,
+    name: `NewName${i}`,
+    score: `9999`,
     time: `27`,
-    timestamp: `26d 6m 0hrs 5mins`
+    timestamp: `30d 6m 0hrs 5mins`
   };
   addDoc(leaderboardRef, data);
 }});
