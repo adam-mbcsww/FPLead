@@ -60,6 +60,11 @@ $(() => {
    // Filter results to show only records within a certain date range
    const startDate = new Date('2024-06-29T00:00:00.000Z');
    const endDate = new Date('2024-07-01T00:00:00.000Z');
+   
+   // Set hours and minutes to 00:00:00
+   startDate.setHours(0, 0, 0, 0);
+   endDate.setHours(23, 59, 59, 999); // set end of day
+   
    const filteredList = userList.filter((user) => {
      const userDate = new Date(user.timestamp);
      console.log(`userDate: ${userDate}, startDate: ${startDate}, endDate: ${endDate}, result: ${userDate >= startDate && userDate <= endDate}`);
