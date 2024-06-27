@@ -50,9 +50,10 @@ $(() => {
     });
     
     // Filter results to show only records from a certain date
-    const cutoffDate = new Date('2024-06-24T00:00:00.000Z'); // adjust this date as needed
     const filteredList = userList.filter((user) => {
       const userDate = new Date(user.timestamp);
+      const cutoffDate = new Date('2024-06-24T00:00:00.000Z');
+      console.log(`userDate: ${userDate}, cutoffDate: ${cutoffDate}, result: ${userDate >= cutoffDate}`);
       return userDate >= cutoffDate;
     });
     
