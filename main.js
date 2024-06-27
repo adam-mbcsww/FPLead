@@ -22,12 +22,13 @@ $(() => {
 
   function convertTimeFormat(timeString) {
     const parts = timeString.split(' ');
-    const day = parseInt(parts[0].replace('d', ''));
+    const year = parseInt(parts[4].replace('yr', '')); // extract the year from the timeString
     const month = parseInt(parts[1].replace('m', '')) - 1; // months are 0-based in JS
+    const day = parseInt(parts[0].replace('d', ''));
     const hours = parseInt(parts[2].replace('hrs', ''));
     const minutes = parseInt(parts[3].replace('mins', ''));
   
-    const date = new Date(2024, month, day, hours, minutes, 0, 0); // assuming the year is 2024
+    const date = new Date(year, month, day, hours, minutes, 0, 0);
     return date.toISOString();
   }
 
